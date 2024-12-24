@@ -3,7 +3,6 @@
    Case Study Questions
    --------------------*/
 
--- 2. How many days has each customer visited the restaurant?
 -- 3. What was the first item from the menu purchased by each customer?
 -- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 -- 5. Which item was the most popular for each customer?
@@ -20,6 +19,7 @@ SELECT * FROM menu;
 SELECT * FROM sales;
 
 -- 1. What is the total amount each customer spent at the restaurant?
+-- Day - 1
 SELECT 
 	s.customer_id, 
     SUM(price) AS amount_each_customer_spent
@@ -28,3 +28,12 @@ sales s
 JOIN menu m
 ON s.product_id = m.product_id
 GROUP BY s.customer_id;
+
+-- 2. How many days has each customer visited the restaurant?
+SELECT
+	customer_id,
+    COUNT(DISTINCT order_date) AS customer_visit_days
+FROM
+	sales
+GROUP BY customer_id;
+	
